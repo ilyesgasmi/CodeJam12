@@ -1,11 +1,17 @@
 // tailwind.config.js
 module.exports = {
   content: [
-    // Example content paths...
-    './public/**/*.html',
-    './src/**/*.{js,jsx,ts,tsx,vue}',
+    './public/index.html',
+    './src/**/*.vue',
+    './src/**/*.js',
+    './src/**/*.ts',
+    './src/views/**/*.vue',
+    './src/views/**/*.js',
+    './src/views/**/*.ts',
+    './src/components/**/*.vue',
+    './src/components/**/*.js',
+    './src/components/**/*.ts',
   ],
-  prefix: 'tw-',
   theme: {
     extend: {},
   },

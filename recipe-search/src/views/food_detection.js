@@ -3,6 +3,7 @@ import axios from 'axios';
 export default {
     data(){
         return{
+            loadList: false,
             file1:null,
             url:null,
             foodList: [],
@@ -33,6 +34,8 @@ export default {
                     console.error(error);
                 });
             }
+            this.loadList = true
+            console.log(this.cardList)
         },
         getFoodCV: async function(foodList) {
             var image = ""

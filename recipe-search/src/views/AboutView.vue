@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!food" class="pl-5 pr-5">
+    <div v-if="!loadList" class="pl-5 pr-5">
       <div class="pt-6 pb-6">
         <b-form-file id="file-large" accept=".jpg, .png" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
       </div>
@@ -13,22 +13,18 @@
         <button v-if="file1" class="button-30" @click="getFoodCV(food)">Find out more about my dish!</button>
       </div>
     </div>
-    <div v-if="food">
-      <div v-for="(food, food_index) in foodList">
-        <div>
-          <b-card
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
+    <div v-if="loadList">
+      <div class="grid grid-rows-3 grid-flow-col gap-4 sm:grid-rows-1">
+      <div v-for="food in cardList">
+            <b-card
+            :title=food.hits[0].recipe.label
+            :img-src=food.hits[0].recipe.image
             img-alt="Image"
             img-top
             tag="article"
-            style="max-width: 20rem;"
+            style="max-width: 20rem; height: 200px;"
             class="mb-2"
           >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </b-card-text>
-
             <b-button href="#" variant="primary">Go somewhere</b-button>
           </b-card>
         </div>

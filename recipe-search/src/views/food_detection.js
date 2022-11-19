@@ -5,9 +5,10 @@ export default {
         return{
             recipeData: [],
             recipeInputText: '',
+            edamamInput: '',
             file1:null,
             url:null,
-            food: null,
+            foodList: [],
         }
     },
     watch:{
@@ -33,7 +34,7 @@ export default {
                   console.error(error);
               });
         },
-        getFoodCV: async function(food) {
+        getFoodCV: async function(foodList) {
             var image = ""
             await this.getBase64Image(this.file1).then((r) => {image=r;})
             function escapeRegExp(str) { return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"); }
@@ -55,7 +56,6 @@ export default {
                   }
                 ]
             }
-            
             await fetch('https://vision.googleapis.com/v1/images:annotate/?key=AIzaSyCivHbxHRi6zlAgu-ebIT7feom-dl-ThcU', {
                 method: 'POST',
                 body: JSON.stringify(myBody),
@@ -64,10 +64,21 @@ export default {
                     'Content-Type': 'application/json',
                 }
             }).then((response) => response.json()).then((results) => {
-                this.food = results.responses[0].webDetection.webEntities.map((x) => [x.description, x.score])
+                this.foodList = results.responses[0].webDetection.webEntities.map((x) => [x.description, x.score])
             })
-            console.log(this.food)
-            
+            console.log(this.foodList);
+            this.concatenateResults(this.foodList)
+        },
+        concatenateResults: function (list) {
+            for(let i = 0; i < list.length; i++){
+                if(i === list.length - 1){
+                    this.edamamInput += list[i][0]
+                }
+                else{
+                    this.edamamInput += list[i][0]+', '
+                }
+            }
+            console.log(this.edamamInput);
         },
         getBase64Image: function(file) {
             return new Promise(function (resolve, reject) {

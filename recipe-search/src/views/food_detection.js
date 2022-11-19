@@ -3,12 +3,10 @@ import axios from 'axios';
 export default {
     data(){
         return{
-            recipeData: [],
-            recipeInputText: '',
-            edamamInput: '',
             file1:null,
             url:null,
             foodList: [],
+            cardList: [],
         }
     },
     watch:{
@@ -17,29 +15,30 @@ export default {
         }
     },
     methods: {
-        getRecipe: function () {
-            const options = {
-                method: 'GET',
-                url: 'https://edamam-recipe-search.p.rapidapi.com/search',
-                params: {q: 'chicken'},
-                headers: {
-                  'X-RapidAPI-Key': '302a938f71msh3c77bb164219defp1d9019jsn5124e0265a6f',
-                  'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
-                }
-              };
-              axios.request(options).then((response) => {
-                  this.recipeData = response.data;
-                  console.log(this.recipeData);
-              }).catch((error) => {
-                  console.error(error);
-              });
+        getRecipe: async function (foods) {
+            this.cardList = []
+            for(let i=0;i<foods.length;i++){
+                const options = {
+                    method: 'GET',
+                    url: 'https://edamam-recipe-search.p.rapidapi.com/search',
+                    params: {q: foods[i]},
+                    headers: {
+                    'X-RapidAPI-Key': '302a938f71msh3c77bb164219defp1d9019jsn5124e0265a6f',
+                    'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
+                    }
+                };
+                axios.request(options).then((response) => {
+                    this.cardList.push(response.data)
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
         },
         getFoodCV: async function(foodList) {
             var image = ""
             await this.getBase64Image(this.file1).then((r) => {image=r;})
             function escapeRegExp(str) { return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"); }
             image = image.replace(new RegExp(escapeRegExp("data:image/")+'(.*?)'+escapeRegExp(";base64,")), '');
-            console.log("image:", image)
             const myBody= 
             {
                 "requests":[
@@ -64,21 +63,10 @@ export default {
                     'Content-Type': 'application/json',
                 }
             }).then((response) => response.json()).then((results) => {
-                this.foodList = results.responses[0].webDetection.webEntities.map((x) => [x.description, x.score])
+                this.foodList = results.responses[0].webDetection.webEntities.map((x) => x.description)
             })
-            console.log(this.foodList);
-            this.concatenateResults(this.foodList)
-        },
-        concatenateResults: function (list) {
-            for(let i = 0; i < list.length; i++){
-                if(i === list.length - 1){
-                    this.edamamInput += list[i][0]
-                }
-                else{
-                    this.edamamInput += list[i][0]+', '
-                }
-            }
-            console.log(this.edamamInput);
+            this.getRecipe(this.foodList)
+            
         },
         getBase64Image: function(file) {
             return new Promise(function (resolve, reject) {
@@ -90,6 +78,5 @@ export default {
         }
     },
     mounted(){
-        this.getRecipe();
     }
 }

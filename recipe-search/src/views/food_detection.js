@@ -5,6 +5,14 @@ export default {
         return{
             recipeData: [],
             recipeInputText: '',
+            file1:null,
+            url:null
+        }
+    },
+    watch:{
+        file1: function(value){
+            console.log("hello", value)
+            this.url=URL.createObjectURL(value)
         }
     },
     methods: {
@@ -24,7 +32,7 @@ export default {
               }).catch((error) => {
                   console.error(error);
               });
-        }
+        },
     },
     mounted(){
         this.getRecipe();

@@ -2,12 +2,12 @@
   <div>
     <div class="text-lg text-center">
       This is a recipe page <br> <br>
-      <input class="text-center" v-model="recipeInputText" type="text" placeholder="enter food here"> <br> <br>
     </div>
-    <div>
-      <b-form-group label-cols-sm="2" label-size="lg">
-        <b-form-file id="file-large" size="lg"></b-form-file>
-      </b-form-group>
+    <div class="pl-5 pr-5">
+      <b-form-file id="file-large" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
+      <div v-if="url" class="flex justify-center">
+        <img :src="url" />
+      </div>
     </div>
   </div>
 </template>

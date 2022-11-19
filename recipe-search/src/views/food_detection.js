@@ -1,10 +1,6 @@
 import axios from 'axios';
-import { FormFilePlugin } from 'bootstrap-vue';
 
 export default {
-    components: {
-        FormFilePlugin
-    },
     data(){
         return{
             recipeData: [],

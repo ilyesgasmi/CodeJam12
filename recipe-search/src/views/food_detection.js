@@ -11,7 +11,6 @@ export default {
     },
     watch:{
         file1: function(value){
-            console.log("hello", value)
             this.url=URL.createObjectURL(value)
         }
     },
@@ -33,6 +32,9 @@ export default {
                   console.error(error);
               });
         },
+        debug: function() {
+            console.log("request sent with file:", this.file1.name)
+        }
     },
     mounted(){
         this.getRecipe();

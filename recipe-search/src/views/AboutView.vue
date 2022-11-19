@@ -1,9 +1,13 @@
 <template>
   <div>
     <div v-if="!food" class="pl-5 pr-5">
-      <b-form-file id="file-large" accept=".jpg, .png" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
-      <div v-if="url" style="display: flex;justify-content: center;">
-        <img style="box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 15px;" :src="url" />
+      <div class="pt-6 pb-6">
+        <b-form-file id="file-large" accept=".jpg, .png" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
+      </div>
+      <div v-if="url" class="pb-6 flex justify-center">
+        <div>
+          <img class="boxshadow" :src="url" />
+        </div>
       </div>
       <div class="btn-center">
         <button v-if="file1" class="button-30" @click="getFoodCV(food)">Find out more about my dish!</button>

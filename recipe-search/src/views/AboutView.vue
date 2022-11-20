@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="!loadList" class="pl-5 pr-5">
+    <div v-if="!loadList && !loading" class="pl-5 pr-5">
       <div class="pt-6 pb-6">
-        <b-form-file id="file-large" accept=".jpg, .png" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
+        <b-form-file id="file-large" accept="image/*" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
       </div>
       <div v-if="url" class="pb-6 flex justify-center">
         <div>
@@ -13,18 +13,19 @@
         <button v-if="file1" class="button-30" @click="getFoodCV(food)">Find out more about my dish!</button>
       </div>
     </div>
+    <div v-if="!loadList && loading">
+        <h1>LOADING</h1>
+    </div>
     <div v-if="loadList">
-      <div class="grid grid-rows-3 grid-flow-col gap-4 sm:grid-rows-1">
-      <div v-for="food in cardList">
+      <div class="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 place-content-evenly">
+      <div v-for="(food, index) in cardList">
             <b-card
-            :title=food.hits[0].recipe.label
+            :title=foodList[index]
             :img-src=food.hits[0].recipe.image
             img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem; height: 200px;"
             class="mb-2"
           >
+            
             <b-button href="#" variant="primary">Go somewhere</b-button>
           </b-card>
         </div>

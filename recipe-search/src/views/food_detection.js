@@ -4,6 +4,7 @@ export default {
     data(){
         return{
             loadList: false,
+            loading: false,
             file1:null,
             url:null,
             foodList: [],
@@ -16,6 +17,13 @@ export default {
         }
     },
     methods: {
+        notDuplicate: function(a, index) {
+            if(this.cardList.map(x=>{return x.hits[0].recipe.label}).includes(a.hits[0].recipe.label)){
+            } else{
+                this.cardList.splice(index, 0, a)
+            }
+
+        },
         getRecipe: async function (foods) {
             this.cardList = []
             for(let i=0;i<foods.length;i++){
@@ -29,15 +37,17 @@ export default {
                     }
                 };
                 axios.request(options).then((response) => {
-                    this.cardList.push(response.data)
+                    this.notDuplicate(response.data, foods.indexOf(foods[i]));
                 }).catch((error) => {
                     console.error(error);
                 });
             }
+           
             this.loadList = true
-            console.log(this.cardList)
+            this.loading=false
         },
         getFoodCV: async function(foodList) {
+            this.loading=true
             var image = ""
             await this.getBase64Image(this.file1).then((r) => {image=r;})
             function escapeRegExp(str) { return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"); }

@@ -1,14 +1,28 @@
 import axios from 'axios';
+import { useWindowSize } from 'vue-window-size';
 
 export default {
+    setup() {
+        const { width, height } = useWindowSize();
+        return {
+          windowWidth: width,
+          windowDivHeight: height/100,
+        };
+      },
     data(){
         return{
+            showModal: false,
             loadList: false,
             loading: false,
+            modalValue: {},
+            modalTitle: '',
             file1:null,
             url:null,
             foodList: [],
             cardList: [],
+            modalState: false,
+            windowWidth: 0,
+            windowDivHeight:0,
         }
     },
     watch:{
@@ -17,6 +31,18 @@ export default {
         }
     },
     methods: {
+        capitalize: function(a) {
+            var str = ""
+            a.forEach((x,i) => {
+                str = str + (x.charAt(0).toUpperCase() + x.slice(1))
+                if(i<a.length-1) {
+                    str = str + ", "
+                }
+            })
+            console.log(a, "became", str)
+            return str
+            
+        },
         notDuplicate: function(a, index) {
             if(this.cardList.map(x=>{return x.hits[0].recipe.label}).includes(a.hits[0].recipe.label)){
             } else{
@@ -32,7 +58,7 @@ export default {
                     url: 'https://edamam-recipe-search.p.rapidapi.com/search',
                     params: {q: foods[i]},
                     headers: {
-                    'X-RapidAPI-Key': '302a938f71msh3c77bb164219defp1d9019jsn5124e0265a6f',
+                    'X-RapidAPI-Key': 'fb3a814d64mshef4fc2c04aeb9c9p142573jsne0eddf7d0f35',
                     'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
                     }
                 };
@@ -88,6 +114,12 @@ export default {
                 reader.onload = () => resolve(reader.result)
                 reader.onerror = (error) => reject('Error: ', error);
           })
+        },
+        modalUpdate: function(food, title){
+            this.modalValue = food
+            this.modalTitle = title
+            this.modalState = true
+            console.log(this.modalValue);
         }
     },
     mounted(){

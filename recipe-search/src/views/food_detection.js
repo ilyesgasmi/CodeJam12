@@ -58,7 +58,7 @@ export default {
                     url: 'https://edamam-recipe-search.p.rapidapi.com/search',
                     params: {q: foods[i]},
                     headers: {
-                    'X-RapidAPI-Key': 'fb3a814d64mshef4fc2c04aeb9c9p142573jsne0eddf7d0f35',
+                    'X-RapidAPI-Key': '31ecc60540msh0ab7625ff373e90p1bf84cjsn15035ea64600',
                     'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
                     }
                 };

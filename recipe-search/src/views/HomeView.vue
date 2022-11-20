@@ -22,7 +22,7 @@
           <div>
             <b-card
               title="STEP 1"
-              img-src="src/assets/upload.png"
+              img-src="/upload.png"
               img-alt="Image"
               img-top
               tag="article"
@@ -38,7 +38,7 @@
           <div>
             <b-card
               title="STEP 2"
-              img-src="src/assets/search.jpg"
+              img-src="/search.jpg"
               img-alt="Image"
               img-top
               tag="article"
@@ -53,7 +53,7 @@
 
             <b-card
               title="STEP 3"
-              img-src="src/assets/explore.jpg"
+              img-src="/explore.jpg"
               img-alt="Image"
               img-top
               tag="article"
@@ -78,7 +78,7 @@
 
 .main-image{
   position: relative;
-  background: url(../assets/main-header.jpg) no-repeat center;
+  background: url("/main-header.jpg") no-repeat center;
   background-size: 100%;
   height: 55vh;
   overflow: hidden;

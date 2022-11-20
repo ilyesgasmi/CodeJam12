@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <b-nav>
     <div class="row">
       <div class="flex ml-[5%]">
-        <a href="/"><img class="self-start" id=foodWiz  src="src/assets/Final_Logo1.png" alt="Logo"/> </a>
+        <a href="/"><img class="self-start" id=foodWiz  src="/Final_Logo1.png" alt="Logo"/> </a>
       </div>
 
     </div>

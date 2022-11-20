@@ -14,9 +14,10 @@
       </div>
     </div>
     <div v-if="!loadList && loading">
-      <img class="animate-bounce h-[30%] w-[30%]"  src="src/assets/wiz.png"/> 
+      <img class="animate-bounce h-[30%] w-[30%]"  src="/wiz.png"/> 
     </div>
     <div v-if="loadList">
+      <div class="text-center text-lg font-serif font-bold">Here's what the wizard found for you! <br>Select one of these options to view recipes</div>
       <div class="mx-3 mt-10 grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 place-content-evenly">
       <div v-for="(food, index) in cardList">
           <b-card

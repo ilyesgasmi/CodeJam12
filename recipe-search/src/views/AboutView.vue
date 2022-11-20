@@ -23,7 +23,7 @@
             @click="modalUpdate(food.hits, foodList[index])"
             :title=foodList[index]
             :img-src=food.hits[0].recipe.image
-            class="mb-2 transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
+            class="mb-2 h-full transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300"
           >
           </b-card>
         </div>
@@ -33,21 +33,26 @@
   <b-modal v-model="modalState" size="xl" hide-footer :title=modalTitle>
     <div class="mx-3 mt-10 grid grid-cols-1 place-content-evenly">
       <div v-for="(hit, index) in modalValue">
-        <b-card-group deck >
+        <a style="text-decoration:none" :href=hit.recipe.url>
+        <b-card-group deck>
           <b-card 
             @click=""
             :title=hit.recipe.label
             :img-src=hit.recipe.image
-            class="mb-2 transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300" 
+            class="mb-2  transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300" 
             img-left >
             <b-card-text>
-              Some quick example text to build on the card and make up the bulk of the card's content.
+             Meal Type: {{String(hit.recipe.mealType)}} <br>
+             Ingredients:
+             <div v-for="ingredient in hit.recipe.ingredients">
+              {{ingredient.text}}
+             </div> 
             </b-card-text>
           </b-card>
         </b-card-group>
+      </a>
     </div>   
-    </div>
-        
+    </div>   
   </b-modal>
 </template>
 
@@ -56,6 +61,10 @@
 <style>
 .card-title{
   font-weight:bold;
+  font-size:2em
+}
+.modal-title{
+  font-weight: bold;
   font-size:2em
 }
 .btn-center{

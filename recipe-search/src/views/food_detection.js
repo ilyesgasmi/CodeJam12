@@ -36,7 +36,7 @@ export default {
                     url: 'https://edamam-recipe-search.p.rapidapi.com/search',
                     params: {q: foods[i]},
                     headers: {
-                    'X-RapidAPI-Key': '302a938f71msh3c77bb164219defp1d9019jsn5124e0265a6f',
+                    'X-RapidAPI-Key': 'fb3a814d64mshef4fc2c04aeb9c9p142573jsne0eddf7d0f35',
                     'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
                     }
                 };
@@ -97,6 +97,7 @@ export default {
             this.modalValue = food
             this.modalTitle = title
             this.modalState = true
+            console.log(this.modalValue);
         }
     },
     mounted(){

@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <b-nav align="center">
     <div class="row">
       <div class="flex items-center">
-        <img class="" id=foodWiz  src="src/assets/FoodWizard_Name.png" alt="Logo"/>
+        <a href="/"><img class="" id=foodWiz  src="src/assets/FoodWizard_Name.png" alt="Logo"/></a>
       </div>
       <div class="flex items-center">
         <!-- <img class="" id=wizz src="src/assets/wizzard.png" alt="Logo"/> -->

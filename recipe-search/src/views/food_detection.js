@@ -3,12 +3,16 @@ import axios from 'axios';
 export default {
     data(){
         return{
+            showModal: false,
             loadList: false,
             loading: false,
+            modalValue: {},
+            modalTitle: '',
             file1:null,
             url:null,
             foodList: [],
             cardList: [],
+            modalState: false
         }
     },
     watch:{
@@ -88,6 +92,11 @@ export default {
                 reader.onload = () => resolve(reader.result)
                 reader.onerror = (error) => reject('Error: ', error);
           })
+        },
+        modalUpdate: function(food, title){
+            this.modalValue = food
+            this.modalTitle = title
+            this.modalState = true
         }
     },
     mounted(){

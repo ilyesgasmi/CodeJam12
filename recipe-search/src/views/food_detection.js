@@ -6,7 +6,7 @@ export default {
         const { width, height } = useWindowSize();
         return {
           windowWidth: width,
-          windowDivHeight: height/100,
+          windowDivHeight: height,
         };
       },
     data(){

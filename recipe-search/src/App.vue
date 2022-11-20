@@ -3,17 +3,12 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <b-nav align="center">
+  <b-nav>
     <div class="row">
-      <div class="flex items-center">
-        <a href="/"><img class="" id=foodWiz  src="src/assets/FoodWizard_Name.png" alt="Logo"/></a>
+      <div class="flex ml-[5%]">
+        <a href="/"><img class="self-start" id=foodWiz  src="src/assets/Final_Logo1.png" alt="Logo"/> </a>
       </div>
-      <div class="flex items-center">
-        <!-- <img class="" id=wizz src="src/assets/wizzard.png" alt="Logo"/> -->
-      </div>
-      <div>
-        <img id=wizz src="src/assets/wizzard.png" alt="Logo"/>
-      </div>
+
     </div>
   </b-nav>
   
@@ -27,6 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
   #wizz{
     width:20%
   }
+  
   .row{
     display: flex;
   }

@@ -10,15 +10,15 @@
     <!-- Top Banner -->
     <div class="main-image">
       <div class="container">
-        <h1>Look for your favourite recipes now!</h1>
-        <input type="file" id="file" class="button" accept="image/*">
-        <label for="file"><span class="material-icons">add_photo_alternate</span> &nbsp; Choose a Photo</label>
+        <h1 class="bg-white/50">Look for your favourite recipes now!</h1>
+        <div class="button-get-started">
+          <a href="/about"><label class="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 focus:outline-none focus:ring focus:ring-orange-300 w-[9em]"><span class="material-icons">add_photo_alternate</span> &nbsp; Get started!</label></a>
+        </div>
       </div>
     </div>
     <!-- Bottom cards -->
     <div class="Cards">
-      <b-row>
-        <b-col class="Column">
+
           <div>
             <b-card
               title="STEP 1"
@@ -27,15 +27,14 @@
               img-top
               tag="article"
               style="max-width: 35rem;"
-              class="mb-2"
+              class="mb-2 min-w-[100%]"
             >
             <b-card-text>
               Upload your picture.
             </b-card-text>
             </b-card>
           </div>
-        </b-col>
-        <b-col class="Column">
+
           <div>
             <b-card
               title="STEP 2"
@@ -44,15 +43,14 @@
               img-top
               tag="article"
               style="max-width: 35rem;"
-              class="mb-2"
+              class="mb-2 min-w-[100%]"
             >
             <b-card-text>
               Search and Explore amongst our top recipes.
             </b-card-text>
             </b-card>
           </div>
-        </b-col>
-        <b-col class="Column">
+
             <b-card
               title="STEP 3"
               img-src="src/assets/explore.jpg"
@@ -60,14 +58,14 @@
               img-top
               tag="article"
               style="max-width: 35rem;"
-              class="mb-2"
+              class="mb-2 min-w-[100%]"
             >
             <b-card-text>
               Get Cooking!
             </b-card-text>
             </b-card>
-        </b-col>
-      </b-row>
+
+
     </div>
 </template>
 
@@ -76,7 +74,8 @@
 
 
 <!-- Styling -->
-<style>
+<style scoped>
+
 .main-image{
   position: relative;
   background: url(../assets/main-header.jpg) no-repeat center;
@@ -135,6 +134,31 @@ label {
   font-family: "Montserrat",sans-serif;
   border-radius: 24px;
 }
+@media (max-width: 1000px) {
+  .main-image{
+    position:relative;
+    top:0em;
+    height:30vh
+  }
+  .container h1{
+    display:none;
+  }
+  .button-get-started {
+    position:relative;
+    top:6em
+  }
 
+
+  .card {
+        display:absolute;
+        margin: 0 auto;
+        float: none;
+  }
+  .card-img-top {
+    width: 100%;
+    height: 12vw;
+    object-fit: cover;
+}
+}
 </style>
 

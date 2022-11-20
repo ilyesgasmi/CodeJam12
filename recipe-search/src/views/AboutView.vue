@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="h-[100vh]"> 
     <div v-if="!loadList && !loading" class="pl-5 pr-5 max-h-[100%]">
       <div class="pt-6 pb-6">
-        <b-form-file id="file-large" accept="image/*" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
+        <b-form-file accept="image/*" v-model="file1" size="lg" placeholder="Upload picture"></b-form-file>
       </div>
       <div v-if="url" class="pb-6 flex justify-center">
         <div class="yoyo">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-if="!loadList && loading">
-        <font-awesome-icon class="animate-spin h-full w-full mr-3 " icon="fa-solid fa-spinner" />
+      <img class="animate-bounce h-[30%] w-[30%]"  src="src/assets/wiz.png"/> 
     </div>
     <div v-if="loadList">
       <div class="mx-3 mt-10 grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 place-content-evenly">
@@ -30,8 +30,12 @@
       </div>
     </div>
   </div>
-  <b-modal v-model="modalState" size="xl" hide-footer :title=modalTitle>
-    <div class="mx-3 mt-10 grid grid-cols-1 place-content-evenly">
+  <b-modal 
+      content-class='test'
+      body-bg-variant="#ffdd9c"
+      footer-bg-variant="#ffdd9c"
+  v-model="modalState" size="xl" hide-footer :title=modalTitle>
+    <div class="mx-3 mt-10 grid grid-cols-1 place-content-evenly ">
       <div v-for="(hit, index) in modalValue">
         <a style="text-decoration:none" :href=hit.recipe.url>
         <!-- MOBILE VIEW -->
@@ -169,6 +173,10 @@
 .button-30:active {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
+}
+.test{
+  background: rgb(255,145,0);
+        background: linear-gradient(0deg, rgba(250, 152, 25, 0.785) 80%, rgba(255,255,255,1) 100%);
 }
 </style>
 

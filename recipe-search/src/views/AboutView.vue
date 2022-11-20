@@ -52,7 +52,7 @@
                 <hr>
                 <div>
                     <div v-for="(d,i) in hit.recipe.digest">
-                      <div v-if="i<3">{{d.label}} {{d.total}}</div>
+                      <div v-if="i<3">{{d.label}}: {{d.total.toFixed(2)}}g</div>
                     </div> 
                 </div>
             </div>
@@ -81,7 +81,7 @@
                 <hr>
                 <div>
                     <div v-for="(d,i) in hit.recipe.digest">
-                      <div v-if="i<3">{{d.label}} {{d.total}}</div>
+                      <div v-if="i<3">{{d.label}}: {{d.total.toFixed(2)}}g</div>
                     </div> 
                 </div>
             </div>

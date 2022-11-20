@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="!loadList && !loading" class="pl-5 pr-5">
+    <div v-if="!loadList && !loading" class="pl-5 pr-5 max-h-[100%]">
       <div class="pt-6 pb-6">
         <b-form-file id="file-large" accept="image/*" v-model="file1" size="lg" placeholder="Choose a file or drop it here..."></b-form-file>
       </div>
       <div v-if="url" class="pb-6 flex justify-center">
-        <div>
-          <img class="boxshadow" :src="url" />
+        <div class="yoyo">
+          <img class="boxshadow max-h-[100%]" :src="url" />
         </div>
       </div>
       <div class="btn-center">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-if="!loadList && loading">
-        <h1>LOADING</h1>
+        <font-awesome-icon class="animate-spin h-full w-full mr-3 " icon="fa-solid fa-spinner" />
     </div>
     <div v-if="loadList">
       <div class="mx-3 mt-10 grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 gap-4 md:grid-cols-3 sm:grid-cols-2 place-content-evenly">
@@ -34,19 +34,60 @@
     <div class="mx-3 mt-10 grid grid-cols-1 place-content-evenly">
       <div v-for="(hit, index) in modalValue">
         <a style="text-decoration:none" :href=hit.recipe.url>
-        <b-card-group deck>
+        <!-- MOBILE VIEW -->
+        <div></div>
+        <b-card v-if="windowWidth<=1000" 
+            @click=""
+            :title=hit.recipe.label
+            :img-src=hit.recipe.image
+            class="mb-2 transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300" 
+             overlay><b-card-text>
+              <div v-if="hit.recipe.cautions.length>0" class="bg-white/75"><font-awesome-icon icon="fa-solid fa-circle-exclamation" /> {{capitalize(hit.recipe.cautions)}} </div>
+              <div class="bg-white/75 border-2 px-2 mt-2">Macros
+                <hr>
+                <div>
+                    <div v-for="(d,i) in hit.recipe.digest">
+                      <div v-if="i<3">{{d.label}} {{d.total}}</div>
+                    </div> 
+                </div>
+            </div>
+            <div class="bg-white/75 border-2 px-2 mt-2">Ingredients
+              <hr>
+              <div class="overflow-y-scroll max-h-12">
+                <div v-for="ingredient in hit.recipe.ingredients">
+                  {{ingredient.text}}
+                </div> 
+            </div>
+            </div>
+            </b-card-text>
+        </b-card>
+        <!-- DESKTOP VIEW: -->
+        <b-card-group v-if="windowWidth>1000" deck>
           <b-card 
             @click=""
             :title=hit.recipe.label
             :img-src=hit.recipe.image
             class="mb-2  transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-300" 
             img-left >
+            <div class="absolute top-1 right-1 h-16">{{capitalize(hit.recipe.mealType)}} <br> {{capitalize(hit.recipe.cuisineType)}}</div>
             <b-card-text>
-             Meal Type: {{String(hit.recipe.mealType)}} <br>
-             Ingredients:
-             <div v-for="ingredient in hit.recipe.ingredients">
-              {{ingredient.text}}
-             </div> 
+              <div v-if="hit.recipe.cautions.length>0"><font-awesome-icon icon="fa-solid fa-circle-exclamation" /> {{capitalize(hit.recipe.cautions)}} </div>
+              <div class="border-2 px-2 min-w-[88%] max-w-[88%]">Macros
+                <hr>
+                <div>
+                    <div v-for="(d,i) in hit.recipe.digest">
+                      <div v-if="i<3">{{d.label}} {{d.total}}</div>
+                    </div> 
+                </div>
+            </div>
+            <div class="border-2 px-2 mt-2 min-w-[88%] max-w-[88%]">Ingredients
+              <hr>
+              <div class="overflow-y-scroll max-h-20">
+                <div v-for="ingredient in hit.recipe.ingredients">
+                  {{ingredient.text}}
+                </div> 
+            </div>
+            </div>
             </b-card-text>
           </b-card>
         </b-card-group>
@@ -59,9 +100,24 @@
 <script src="./food_detection.js"></script>
 
 <style>
+.yoyo{
+  height: 50vh;
+}
 .card-title{
   font-weight:bold;
-  font-size:2em
+  font-size:2em;
+  width: 90%;
+}
+@media (max-width: 1000px){
+  .card-title{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    background-color: rgba(255,255,255,75%);
+    font-weight:bold;
+    font-size:2em;
+    width: 90%;
+}
 }
 .modal-title{
   font-weight: bold;

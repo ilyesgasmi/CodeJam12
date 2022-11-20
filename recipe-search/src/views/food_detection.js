@@ -1,6 +1,14 @@
 import axios from 'axios';
+import { useWindowSize } from 'vue-window-size';
 
 export default {
+    setup() {
+        const { width, height } = useWindowSize();
+        return {
+          windowWidth: width,
+          windowDivHeight: height/100,
+        };
+      },
     data(){
         return{
             showModal: false,
@@ -12,7 +20,9 @@ export default {
             url:null,
             foodList: [],
             cardList: [],
-            modalState: false
+            modalState: false,
+            windowWidth: 0,
+            windowDivHeight:0,
         }
     },
     watch:{
@@ -21,6 +31,18 @@ export default {
         }
     },
     methods: {
+        capitalize: function(a) {
+            var str = ""
+            a.forEach((x,i) => {
+                str = str + (x.charAt(0).toUpperCase() + x.slice(1))
+                if(i<a.length-1) {
+                    str = str + ", "
+                }
+            })
+            console.log(a, "became", str)
+            return str
+            
+        },
         notDuplicate: function(a, index) {
             if(this.cardList.map(x=>{return x.hits[0].recipe.label}).includes(a.hits[0].recipe.label)){
             } else{

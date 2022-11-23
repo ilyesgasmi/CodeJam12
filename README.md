@@ -31,4 +31,6 @@ javascript
 postman
 tailwind
 vue.js
-foodwizard.netlify.app
+
+Try it out!
+www.foodwizard.netlify.app

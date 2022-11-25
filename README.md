@@ -33,4 +33,4 @@ tailwind
 vue.js
 
 Try it out!
-www.foodwizard.netlify.app
+https://foodwizard.netlify.app
